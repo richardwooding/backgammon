@@ -12,6 +12,7 @@ package backgammon
 import (
 	"errors"
 	"fmt"
+	"slices"
 )
 
 // Color identifies a player. White moves from point 24 toward 1 (in its own
@@ -239,12 +240,7 @@ func LegalTurns(b Board, c Color, d1, d2 int8) [][]Hop {
 
 // hopUsesDie reports whether hop h can be a play of the given die on board b.
 func hopUsesDie(b Board, c Color, h Hop, die int8) bool {
-	for _, lh := range b.legalHops(c, die) {
-		if lh == h {
-			return true
-		}
-	}
-	return false
+	return slices.Contains(b.legalHops(c, die), h)
 }
 
 func dfs(b Board, c Color, dice []int8, prefix []Hop, all *[][]Hop, seen map[string]bool) {

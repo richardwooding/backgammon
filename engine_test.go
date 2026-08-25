@@ -334,10 +334,10 @@ func TestRandomPlayouts(t *testing.T) {
 		return int(rng % uint64(n))
 	}
 	finished := 0
-	for game := 0; game < 20; game++ {
+	for game := range 20 {
 		b := Start()
 		c := White
-		for turn := 0; turn < 800; turn++ {
+		for range 800 {
 			if b.Winner() != nil {
 				finished++
 				break
